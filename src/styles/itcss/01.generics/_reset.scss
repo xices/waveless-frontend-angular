@@ -1,0 +1,55 @@
+// 1. Usa box-sizing: border-box para todo, incluyendo pseudo-elementos
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+// 2. Reseteo base ligero, eliminando márgenes predeterminados de forma segura
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+// 3. Mejorar legibilidad y rendering
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+// 4. Resetear listas: elimina balas de listas con clase, pero no de listas simples
+ul[class], ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+// 5. Imágenes y elementos multimedia (responsive)
+img, picture, video, canvas, svg {
+  display: block;
+  max-inline-size: 100%; // Usando propiedades lógicas modernas
+}
+
+// 6. Formateo de elementos de formulario (heredar fuentes)
+input, button, textarea, select {
+  font: inherit;
+}
+
+// 7. Evitar desbordamiento de texto largo
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+// 8. Soporte para prefijos de animaciones y scroll
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

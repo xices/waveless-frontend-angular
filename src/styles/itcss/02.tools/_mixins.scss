@@ -1,0 +1,44 @@
+@use "../00.settings/variables" as *;
+@use "media-queries" as mq;
+
+@mixin container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+
+  @media (max-width: 480px) {
+    padding-inline: var(--gutter);
+  }
+}
+
+@mixin font-responsive($token) {
+  $sizes: map-get($font-scale, $token);
+
+  @if $sizes == null {
+    @error "font-responsive(): token '#{$token}' no existe en $font-scale";
+  }
+
+  // Base (mobile-first)
+  font-size: map-get($sizes, base);
+
+  // Breakpoint small (si existe)
+  @if map-has-key($sizes, small) {
+    @include mq.up($bp-small) {
+      font-size: map-get($sizes, small);
+    }
+  }
+
+  // Breakpoint tablet (si existe)
+  @if map-has-key($sizes, tablet) {
+    @include mq.up($bp-tablet) {
+      font-size: map-get($sizes, tablet);
+    }
+  }
+
+  // Breakpoint desktop (si existe)
+  @if map-has-key($sizes, desktop) {
+    @include mq.up($bp-desktop) {
+      font-size: map-get($sizes, desktop);
+    }
+  }
+}

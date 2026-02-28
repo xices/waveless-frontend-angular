@@ -1,0 +1,30 @@
+<section class="adventures">
+  <div class="adventures__container">
+    
+    <div class="adventures__header">
+      <h2 class="adventures__title">
+        Vive tus propias aventuras
+      </h2>
+      <p class="adventures__subtitle">
+        Para los que les gusta explorar y conocer mundo sin complejos
+      </p>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="adventures__sidebar">
+        <app-filters-sidebar
+          (filtersChange)="onFiltersChange($event)">
+        </app-filters-sidebar>
+    </aside>
+
+    <div class="adventures__content">
+    <div class="adventures__grid">
+      <app-adventure-card
+        *ngFor="let trip of filteredTrips"
+        [trip]="trip">
+      </app-adventure-card>
+    </div>
+  </div>
+
+  </div>
+</section>

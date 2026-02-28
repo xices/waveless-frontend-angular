@@ -1,0 +1,191 @@
+@use "styles/itcss/02.tools/media-queries" as mq;
+@use "styles/itcss/02.tools/mixins" as mixins;
+@use "styles/itcss/00.settings/variables" as *;
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 400px; // Altura fija según Figma
+  overflow: hidden;
+
+  /* Track del slider */
+  &__track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+  }
+
+  /* Cada slide */
+  &__slide {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+  }
+
+  /* Imagen fondo */
+  &__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Overlay oscuro */
+  &__slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.28);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Contenido centrado */
+  &__content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    gap: 14px;
+    color: var(--color-bg);
+  }
+
+  /* Título */
+  &__title {
+    margin: 0;
+    max-width: 820px;
+    font-weight: 700;
+    line-height: 1.05;
+    padding-inline: 40px;
+
+    @include mixins.font-responsive(hero-title);
+
+    @include mq.up($bp-small) {
+        padding-inline: 0;
+    }
+  }
+
+  /* Subtítulo */
+  &__subtitle {
+    margin: 0;
+    max-width: 820px;
+    font-weight: 500;
+    line-height: 1.35;
+    padding-inline: 40px;
+
+    @include mixins.font-responsive(hero-subtitle);
+
+    @include mq.up($bp-small) {
+        padding-inline: 0;
+    }
+  }
+
+  /* Botón */
+  &__button {
+    margin-top: 48px;
+    font-size: 20px;
+
+    @include mq.up($bp-small) {
+        font-size: 16px;
+    }
+  }
+
+  /* Flechas laterales */
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+    border-radius: 2px;
+    background: var(--color-control-brand-overlay);
+    color: var(--color-bg);
+
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+
+    display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+    &:hover {
+        background: var(--color-control-brand-overlay-strong);
+    }
+
+    svg {
+      width: 12px;
+      height: auto;
+      display: block;
+    }
+
+    &.is-disabled {
+        opacity: 0.3;
+        pointer-events: none;
+        cursor: default;
+    }
+  }
+
+  &__arrow--left {
+    left: 0;
+  }
+
+  &__arrow--right {
+    right: 0;
+  }
+
+  /* Dots */
+  &__dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 32px;
+    z-index: 3;
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    border: 1px solid var(--color-bg);
+    background: var(--color-control-light);
+
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+        background: var(--color-control-light-strong);
+        transform: scale(1.1);
+    }
+
+    &.is-active {
+        background: var(--color-control-active);
+    }
+  }
+
+  &__dot.is-active {
+    background: var(--color-accent);
+  }
+}

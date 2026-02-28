@@ -1,0 +1,68 @@
+:root {
+  --color-brand: #622f60;
+  --color-accent: #ff8f50;
+  --color-text: #1f2937;
+  --color-muted: #6b7280;
+  --color-bg: #ffffff;
+  --color-surface: #f6f2f9;
+
+  --color-button-text-dark: #000000;
+
+  --color-control-light: rgba(255, 255, 255, 0.75);
+  --color-control-light-strong: rgba(255, 255, 255, 0.9);
+
+  --color-control-brand-overlay: rgba(214, 196, 214, 0.9);
+  --color-control-brand-overlay-strong: rgba(214, 196, 214, 1);
+
+  --color-control-active: var(--color-accent);
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 6px 18px rgba(0,0,0,.08);
+
+  --container: 1200px;
+  --gutter: 16px;
+}
+
+
+$bp-mobile: 390px;
+$bp-small: 744px;
+$bp-tablet: 1024px;
+$bp-desktop: 1440px;
+$bp-wide: 1600px;
+
+$font-family-base: "Nunito", system-ui, sans-serif;
+$font-family-heading: "Syne", sans-serif;
+
+
+// ======================================
+// Typography scale (tokenizada)
+// ======================================
+$font-scale: (
+  hero-title: (
+    base: 32px,
+    small: 34px,
+    desktop: 30px
+  ),
+  hero-subtitle: (
+    base: 28px,
+    small: 30px,
+    desktop: 20px
+  ),
+
+  // Para "Vive tus propias aventuras"
+  section-title: (
+    base: 30px,
+    small: 32px,
+    tablet: 34px,
+    desktop: 38px
+  ),
+  section-subtitle: (
+    base: 20px,
+    small: 20px,
+    tablet: 22px,
+    desktop: 22px
+  )
+);

@@ -1,0 +1,229 @@
+@use "styles/itcss/02.tools/media-queries" as mq;
+@use "styles/itcss/00.settings/variables" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+
+  &__container {
+    margin: 0 32px;
+    padding: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__brand {
+    width: auto;
+  }
+
+  /* ---------- DESKTOP NAV ---------- */
+  &__nav {
+    display: none;
+    position: relative;
+  }
+
+  &__list {
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+
+    &.active {
+      font-weight: 700;
+    }
+  }
+
+  &__indicator {
+    position: absolute;
+    bottom: -29px;
+    height: 4px;
+    background: var(--color-accent);
+    border-radius: 2px;
+    transition: transform 0.3s ease, width 0.3s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 15px solid var(--color-accent);
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__cta {
+    display: none;
+  }
+
+  /* ---------- MOBILE MENU ---------- */
+  &__mobile {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+
+    background: #ffffff;
+    border-bottom: 1px solid #f0f0f0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 32px 24px 40px;
+
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+
+    &.is-open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &__mobile-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    width: 100%;
+  }
+
+  &__mobile-item {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+
+    justify-content: center;
+  }
+
+  &__mobile-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__mobile-cta {
+    width: 100%;
+    max-width: 360px;
+    margin-top: 40px;
+
+    height: 50px;
+    border-radius: 999px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ---------- BURGER ---------- */
+  &__burger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    span {
+      width: 22px;
+      height: 2px;
+      background: #333;
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    &.is-open {
+      span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+      }
+
+      span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+    }
+  }
+
+  /* Desktop */
+
+  @include mq.down(908px) {
+    &__indicator {
+      bottom: -19px;
+    }
+  }
+
+  @include mq.up($bp-small) {
+    &__nav {
+      display: block;
+    }
+
+    &__mobile {
+      display: none;
+    }
+
+    &__burger {
+      display: none;
+    }
+
+    &__cta {
+      display: block;
+    }
+
+    &__list { gap: clamp(40px, 5vw, 96px); }
+  }
+}

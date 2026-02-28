@@ -1,0 +1,11 @@
+@use "../00.settings/variables" as *;
+@use "../02.tools/media-queries" as mq;
+
+.o-cards-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+
+  @include mq.up($bp-tablet) { grid-template-columns: repeat(2, 1fr); }
+  @include mq.up($bp-desktop) { grid-template-columns: repeat(3, 1fr); }
+}

@@ -1,0 +1,52 @@
+.c-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+/* Tamaños */
+.c-btn--md {
+  padding: 16px 41px;
+  font-size: 16px;
+}
+
+.c-btn--lg {
+  padding: 14px 28px;
+  font-size: 16px;
+}
+
+/* Variantes */
+.c-btn--brand {
+  background: var(--color-brand);
+  color: #fff;
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-brand) 85%, black);
+  }
+}
+
+.c-btn--accent {
+  background: var(--color-accent);
+  color: var(--color-button-text-dark);
+}
+
+.c-btn--outline {
+  background: transparent;
+  border: 1px solid var(--color-brand);
+  color: var(--color-brand);
+
+  &:hover {
+    background: var(--color-brand);
+    color: #fff;
+  }
+}

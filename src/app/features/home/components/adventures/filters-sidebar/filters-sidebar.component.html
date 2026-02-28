@@ -1,0 +1,27 @@
+<div class="filters">
+  <h3>Filtrar mi búsqueda</h3>
+
+  <div class="filters__group">
+    <label>
+      <input type="checkbox"
+             (change)="toggleType('Quads', $event)">
+      Quads
+    </label>
+
+    <label>
+      <input type="checkbox"
+             (change)="toggleType('Parapente', $event)">
+      Parapente
+    </label>
+  </div>
+
+  <div class="filters__group">
+    <input type="number"
+           placeholder="Precio mínimo"
+           (input)="setMinPrice($event)">
+
+    <input type="number"
+           placeholder="Precio máximo"
+           (input)="setMaxPrice($event)">
+  </div>
+</div>

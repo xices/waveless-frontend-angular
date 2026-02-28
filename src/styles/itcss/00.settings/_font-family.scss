@@ -1,0 +1,23 @@
+@use "./variables" as v;
+
+@mixin face($family, $weight, $file, $folder) {
+  @font-face {
+    font-family: $family;
+    src: url("/assets/fonts/#{$folder}/#{$file}.woff2") format("woff2");
+    font-weight: $weight;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+
+@include face("Nunito", 400, "Nunito-Regular", "nunito");
+@include face("Nunito", 500, "Nunito-Medium", "nunito");
+@include face("Nunito", 600, "Nunito-SemiBold", "nunito");
+@include face("Nunito", 700, "Nunito-Bold", "nunito");
+@include face("Nunito", 800, "Nunito-ExtraBold", "nunito");
+
+
+@include face("Syne", 500, "Syne-Medium", "syne");
+@include face("Syne", 600, "Syne-SemiBold", "syne");
+@include face("Syne", 700, "Syne-Bold", "syne");

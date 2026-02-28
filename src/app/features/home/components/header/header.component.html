@@ -1,0 +1,80 @@
+<header class="header">
+  <div class="header__container">
+
+    <!-- Logo -->
+    <div class="header__logo">
+      <img
+        src="assets/images/logo/logo-waveless.svg"
+        alt="Waveless"
+        class="header__brand"
+      />
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="header__nav" #nav aria-label="Navegación principal">
+      <ul class="header__list">
+        <li
+          class="header__item"
+          *ngFor="let item of navItems; trackBy: trackByRoute"
+        >
+          <a
+            class="header__link"
+            [class.active]="activeRoute === item.route"
+            (click)="setActive(item.route, $event)"
+          >
+            <img *ngIf="item.icon" [src]="item.icon" alt="" class="header__icon" />
+            {{ item.label }}
+          </a>
+        </li>
+      </ul>
+
+      <span class="header__indicator" #indicator aria-hidden="true"></span>
+    </nav>
+
+    <!-- CTA + Burger -->
+    <div class="header__actions">
+      <button class="c-btn c-btn--brand c-btn--md header__cta">Reserva</button>
+
+      <!-- Burger (mobile) -->
+      <button
+        class="header__burger"
+        [class.is-open]="isMenuOpen"
+        (click)="toggleMenu()"
+        aria-label="Abrir menú"
+        [attr.aria-expanded]="isMenuOpen"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <nav class="header__mobile" [class.is-open]="isMenuOpen" aria-label="Menú móvil">
+    <ul class="header__mobile-list">
+      <li class="header__mobile-item"
+          *ngFor="let item of navItems; trackBy: trackByRoute">
+
+        <a
+          class="header__mobile-link"
+          (click)="setActive(item.route, $event); toggleMenu()">
+
+          <img
+            *ngIf="item.icon"
+            [src]="item.icon"
+            alt=""
+            class="header__mobile-icon" />
+
+          <span class="header__mobile-text">
+            {{ item.label }}
+          </span>
+
+        </a>
+
+      </li>
+    </ul>
+
+    <button class="c-btn c-btn--brand c-btn--md header__mobile-cta">Reserva</button>
+  </nav>
+</header>

@@ -1,0 +1,14 @@
+@use "./itcss/00.settings/font-family";
+@use "./itcss/00.settings/variables" as v;
+
+html, body {
+  font-family: v.$font-family-base;
+}
+
+h1, h2, h3 {
+  font-family: v.$font-family-heading;
+  font-weight: 700;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }

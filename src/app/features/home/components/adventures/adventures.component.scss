@@ -1,0 +1,70 @@
+@use "styles/itcss/02.tools/mixins" as mixins;
+
+.adventures {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 72px 0;
+
+  &__container {
+    max-width: 1128px;
+    margin: 0 auto;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  &__title {
+    font-weight: 700;
+    @include mixins.font-responsive(section-title);
+  }
+
+  &__subtitle {
+    margin-top: 8px;
+    color: #6b7280;
+    @include mixins.font-responsive(section-subtitle);
+  }
+
+  &__sidebar {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+  }
+
+  &__content {
+    width: 100%;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  // REVISAR ESTOS BREAKPOINTS, NO COINCIDEN CON LOS DEFINIDOS EN VARIABLES
+  /* Responsive */
+    @media (max-width: 1200px) {
+    .adventures__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    }
+
+    @media (max-width: 992px) {
+    .adventures {
+        grid-template-columns: 1fr;
+    }
+
+    .adventures__sidebar {
+        position: relative;
+        top: 0;
+    }
+
+    .adventures__grid {
+        grid-template-columns: 1fr;
+    }
+    }
+}

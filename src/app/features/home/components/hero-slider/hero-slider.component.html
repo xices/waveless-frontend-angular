@@ -1,0 +1,73 @@
+<section class="hero">
+  <div
+    class="hero__track"
+    [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+  >
+    <div class="hero__slide" *ngFor="let slide of slides; let i = index">
+      <picture class="hero__media">
+        <source
+          type="image/webp"
+          [attr.srcset]="toSrcSet(slide.image.webp)"
+          sizes="100vw"
+        />
+
+        <img
+          class="hero__image"
+          [src]="slide.image.jpg[2]?.src ?? slide.image.jpg[0].src"
+          [attr.srcset]="toSrcSet(slide.image.jpg)"
+          sizes="100vw"
+          [alt]="slide.image.alt"
+          [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+          [attr.fetchpriority]="i === 0 ? 'high' : null"
+          decoding="async"
+        />
+      </picture>
+
+      <div class="hero__content">
+        <h1 class="hero__title">{{ slide.title }}</h1>
+        <p class="hero__subtitle">{{ slide.subtitle }}</p>
+
+        <button class="c-btn c-btn--accent c-btn--md hero__button">
+          {{ slide.buttonText }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="hero__arrow hero__arrow--left"
+    (click)="prev()"
+    [disabled]="currentIndex === 0"
+    [class.is-disabled]="currentIndex === 0"
+    aria-label="Anterior"
+    >
+        <svg viewBox="0 0 8 13" aria-hidden="true">
+            <path d="M0.294071 6.76293C-0.0978847 6.37216 -0.0978842 5.73734 0.294072 5.34657L5.36419 0.291815C5.75447 -0.0972803 6.38598 -0.0972798 6.77626 0.291815L6.87341 0.38867C7.26537 0.779438 7.26536 1.41426 6.87341 1.80503L2.61077 6.05475L6.87341 10.3045C7.26537 10.6952 7.26536 11.3301 6.87341 11.7208L6.77626 11.8177C6.38598 12.2068 5.75447 12.2068 5.36419 11.8177L0.294071 6.76293Z" fill="currentColor"/>
+        </svg>
+    </button>
+
+  <button
+    class="hero__arrow hero__arrow--right"
+    (click)="next()"
+    [disabled]="currentIndex === slides.length - 1"
+    [class.is-disabled]="currentIndex === slides.length - 1"
+    aria-label="Siguiente"
+    >
+        <svg viewBox="0 0 8 13" aria-hidden="true">
+            <path
+            d="M6.87341 5.34657C7.26537 5.73734 7.26536 6.37216 6.87341 6.76292L1.80329 11.8177C1.41301 12.2068 0.781498 12.2068 0.39122 11.8177L0.294071 11.7208C-0.0978848 11.3301 -0.0978844 10.6952 0.294072 10.3045L4.55671 6.05475L0.294071 1.80502C-0.0978847 1.41425 -0.0978843 0.779431 0.294072 0.388662L0.391221 0.291808C0.781498 -0.0972872 1.41301 -0.0972872 1.80329 0.291808L6.87341 5.34657Z"
+            fill="currentColor"
+            />
+        </svg>
+    </button>
+
+  <div class="hero__dots">
+    <button
+      *ngFor="let _ of slides; let i = index"
+      class="hero__dot"
+      [class.is-active]="i === currentIndex"
+      (click)="goTo(i)"
+      [attr.aria-label]="'Ir al slide ' + (i + 1)"
+    ></button>
+  </div>
+</section>
