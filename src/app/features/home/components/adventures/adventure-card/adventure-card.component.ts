@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PricePopoverComponent } from '../../../../../shared/components/price-popover/price-popover.component';
 
 export interface Trip {
+  id: string;           
   title: string;
   image: string;
   location: string;
@@ -19,30 +20,21 @@ export interface Trip {
   styleUrl: './adventure-card.component.scss',
 })
 export class AdventureCardComponent {
-  @Input() trip!: Trip;
-  @Input() index: number | null = null;
 
-  isOpen = false;
+  @Input() trip!: Trip;
 
   isBreakdownOpen = false;
   openAbove = false;
 
-  openBreakdown(): void {
-    // Placeholder for breakdown action (e.g., open modal)
-    console.log('Ver desglose:', this.trip?.title);
-  }
-
-  toggleBreakdown(event: MouseEvent) {
+  toggleBreakdown(event: MouseEvent): void {
     this.isBreakdownOpen = !this.isBreakdownOpen;
 
     if (this.isBreakdownOpen) {
-      setTimeout(() => {
-        this.calculatePosition(event);
-      });
+      setTimeout(() => this.calculatePosition(event));
     }
   }
 
-  calculatePosition(event: MouseEvent) {
+  calculatePosition(event: MouseEvent): void {
     const button = event.currentTarget as HTMLElement;
     const rect = button.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;

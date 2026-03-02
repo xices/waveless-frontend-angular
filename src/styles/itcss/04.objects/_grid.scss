@@ -4,7 +4,7 @@
 
 .o-cards-grid {
   display: grid;
-  gap: space(2);
+  gap: space(3);
   grid-template-columns: 1fr;
 
   @include mq.up($bp-small) { grid-template-columns: repeat(2, 1fr); }

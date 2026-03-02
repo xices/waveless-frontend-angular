@@ -80,6 +80,9 @@
   /* Content */
   &__content {
     min-width: 0;
+    > div {
+      margin-bottom: space(3);
+    }
   }
 
   &__region {

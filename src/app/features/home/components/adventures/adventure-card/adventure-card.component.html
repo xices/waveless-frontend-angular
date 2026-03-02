@@ -49,7 +49,7 @@
             (click)="toggleBreakdown($event)"
             [class.is-open]="isBreakdownOpen"
             [attr.aria-expanded]="isBreakdownOpen"
-            [attr.aria-controls]="'price-popover-' + index"
+            [attr.aria-controls]="'price-popover-' + trip.id"
           >
             Ver desglose
             <img
@@ -62,7 +62,7 @@
           <!-- SHARED POPOVER -->
           <app-price-popover
             *ngIf="isBreakdownOpen"
-            [id]="'price-popover-' + index"
+            [id]="'price-popover-' + trip.id"
             [title]="'Desglose de precios'"
             [subtitle]="trip.location"
             [rows]="breakdownRows"

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FiltersSidebarComponent } from './filters-sidebar/filters-sidebar.component';
 import { AdventureCardComponent, Trip } from './adventure-card/adventure-card.component';
@@ -20,15 +20,15 @@ interface Filters {
   templateUrl: './adventures.component.html',
   styleUrls: ['./adventures.component.scss']
 })
-export class AdventuresComponent {
+export class AdventuresComponent implements OnInit {
 
   isFiltersOpen = false;
-
   region = 'Asia';
 
   /** Dataset principal */
   trips: Trip[] = [
     {
+      id: 'bangkok',
       title: 'Descubre Bangkok con Iberojet',
       image: 'assets/images/adventures/bangkok-1200.webp',
       location: 'Bangkok, Tailandia',
@@ -37,6 +37,7 @@ export class AdventuresComponent {
       days: 9
     },
     {
+      id: 'desert',
       title: 'Desierto Experience',
       image: 'assets/images/adventures/desert-1200.webp',
       location: 'Dubai, Emiratos Árabes',
@@ -45,6 +46,7 @@ export class AdventuresComponent {
       days: 9
     },
     {
+      id: 'atlas',
       title: 'Explora el Atlas',
       image: 'assets/images/adventures/atlas-1200.webp',
       location: 'Kathmandú, Nepal',
@@ -53,6 +55,7 @@ export class AdventuresComponent {
       days: 9
     },
     {
+      id: 'marrakech',
       title: 'Aventura en Marrakech',
       image: 'assets/images/adventures/marrakech-1200.webp',
       location: 'Bali, Indonesia',
@@ -61,6 +64,7 @@ export class AdventuresComponent {
       days: 9
     },
     {
+      id: 'safari',
       title: 'Safari en el desierto',
       image: 'assets/images/adventures/safari-1200.webp',
       location: 'Sri Lanka',
@@ -68,8 +72,8 @@ export class AdventuresComponent {
       category: 'Quads',
       days: 9
     },
-
     {
+      id: 'mekong',
       title: 'Ruta por el Mekong',
       image: 'assets/images/adventures/mekong-1200.webp',
       location: 'Vietnam',
@@ -78,6 +82,7 @@ export class AdventuresComponent {
       days: 9
     },
     {
+      id: 'angkor',
       title: 'Templos de Angkor',
       image: 'assets/images/adventures/angkor-1200.webp',
       location: 'Camboya',
@@ -86,6 +91,7 @@ export class AdventuresComponent {
       days: 9
     },
     {
+      id: 'himalaya',
       title: 'Aventura en el Himalaya',
       image: 'assets/images/adventures/himalaya-1200.webp',
       location: 'India',
@@ -94,6 +100,7 @@ export class AdventuresComponent {
       days: 9
     },
     {
+      id: 'phiphi',
       title: 'Islas Phi Phi Experience',
       image: 'assets/images/adventures/phiphi-1200.webp',
       location: 'Tailandia',
@@ -102,6 +109,7 @@ export class AdventuresComponent {
       days: 9
     },
     {
+      id: 'borneo',
       title: 'Safari en Borneo',
       image: 'assets/images/adventures/borneo-1200.webp',
       location: 'Malasia',
@@ -112,7 +120,36 @@ export class AdventuresComponent {
   ];
 
   /** Estado filtrado */
-  filteredTrips: Trip[] = [...this.trips];
+  filteredTrips: Trip[] = [];
+
+  /** Bloques visuales estables (NO getter) */
+  tripGroups: Trip[][] = [];
+
+  ngOnInit(): void {
+    this.filteredTrips = [...this.trips];
+    this.buildTripGroups();
+  }
+
+  /** Agrupación visual 3 + resto */
+  private buildTripGroups(): void {
+
+    const groups: Trip[][] = [];
+
+    if (!this.filteredTrips.length) {
+      this.tripGroups = [];
+      return;
+    }
+
+    // Primer bloque: 3
+    groups.push(this.filteredTrips.slice(0, 3));
+
+    // Segundo bloque: resto
+    if (this.filteredTrips.length > 3) {
+      groups.push(this.filteredTrips.slice(3));
+    }
+
+    this.tripGroups = groups;
+  }
 
   /** Manejo de filtros */
   onFiltersChange(filters: Filters): void {
@@ -133,17 +170,20 @@ export class AdventuresComponent {
 
       return matchType && matchMin && matchMax;
     });
+
+    // 🔥 IMPORTANTE: reconstruir bloques después de filtrar
+    this.buildTripGroups();
   }
 
   trackByTrip(index: number, trip: Trip): string {
-    return trip.title;
+    return trip.id;
   }
 
-  openFilters() {
+  openFilters(): void {
     this.isFiltersOpen = true;
   }
 
-  closeFilters() {
+  closeFilters(): void {
     this.isFiltersOpen = false;
   }
 }

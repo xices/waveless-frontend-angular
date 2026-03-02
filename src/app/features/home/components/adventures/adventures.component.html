@@ -35,18 +35,20 @@
       <!-- CONTENT -->
       <div class="adventures__content">
 
-        <!-- REGION -->
-        <h3 class="adventures__region">
-          {{ region }}
-        </h3>
+        <div *ngFor="let group of tripGroups">
+          <!-- REGION -->
+          <h3 class="adventures__region">
+            {{ region }}
+          </h3>
 
-        <!-- GRID -->
-        <div class="o-cards-grid">
-          <app-adventure-card
-            *ngFor="let trip of filteredTrips; index as i; trackBy: trackByTrip"
-            [trip]="trip"
-            [index]="i">
-          </app-adventure-card>
+          <!-- GRID -->
+          <div class="o-cards-grid">
+            <app-adventure-card
+              *ngFor="let trip of group; index as i; trackBy: trackByTrip"
+              [trip]="trip">
+            </app-adventure-card>
+          </div>
+
         </div>
 
         <!-- DRAWER VERSION -->
