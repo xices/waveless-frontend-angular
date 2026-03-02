@@ -1,16 +1,17 @@
 @use "styles/itcss/02.tools/media-queries" as mq;
 @use "styles/itcss/00.settings/variables" as *;
+@use "styles/itcss/00.settings/spacing" as *;
 
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #ffffff;
+  background: var(--color-bg);
   border-bottom: 1px solid #f0f0f0;
 
   &__container {
-    margin: 0 32px;
-    padding: 16px 0;
+    margin: 0 space(4);
+    padding: space(2) 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,7 +29,7 @@
 
   &__list {
     display: flex;
-    gap: 32px;
+    gap: space(4);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -41,7 +42,7 @@
   &__link {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 6px; // NOTE: micro spacing intencional (no pertenece a la escala base 8)
     font-size: 16px;
     font-weight: 600;
     color: #333;
@@ -57,6 +58,7 @@
   &__indicator {
     position: absolute;
     bottom: -29px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
     height: 4px;
     background: var(--color-accent);
     border-radius: 2px;
@@ -66,6 +68,7 @@
       content: "";
       position: absolute;
       top: -12px;
+      // NOTE: micro spacing intencional (no pertenece a la escala base 8)
       left: 50%;
       transform: translateX(-50%);
       width: 0;
@@ -84,7 +87,7 @@
   &__actions {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: space(2);
   }
 
   &__cta {
@@ -98,14 +101,14 @@
     left: 0;
     width: 100%;
 
-    background: #ffffff;
+    background: var(--color-bg);
     border-bottom: 1px solid #f0f0f0;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    padding: 32px 24px 40px;
+    padding: space(4) space(3) space(5);
 
     transform: translateY(-10px);
     opacity: 0;
@@ -126,7 +129,7 @@
 
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: space(4);
 
     width: 100%;
   }
@@ -139,7 +142,7 @@
   &__mobile-link {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 12px; // NOTE: micro spacing intencional (no pertenece a la escala base 8)
 
     font-size: 20px;
     font-weight: 600;
@@ -157,7 +160,7 @@
   &__mobile-cta {
     width: 100%;
     max-width: 360px;
-    margin-top: 40px;
+    margin-top: space(5);
 
     height: 50px;
     border-radius: 999px;
@@ -171,7 +174,7 @@
   &__burger {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 4px; // NOTE: micro spacing intencional (no pertenece a la escala base 8)
     background: none;
     border: none;
     cursor: pointer;
@@ -204,6 +207,7 @@
   @include mq.down(908px) {
     &__indicator {
       bottom: -19px;
+      // NOTE: micro spacing intencional (no pertenece a la escala base 8)
     }
   }
 

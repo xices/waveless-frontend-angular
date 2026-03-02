@@ -1,0 +1,175 @@
+@use "styles/itcss/00.settings/spacing" as *;
+@use "styles/itcss/00.settings/variables" as v;
+@use "styles/itcss/02.tools/media-queries" as mq;
+
+.c-popover {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 12px);
+  // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+  width: 420px;
+  background: var(--color-bg);
+  border-radius: 24px;
+  box-shadow: var(--card-shadow-base-default);
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+  overflow: hidden;
+
+  &.is-above {
+    top: auto;
+    bottom: calc(100% + 12px);
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+  }
+
+  &__header {
+    padding: space(2) space(2);
+    background: var(--card-head-footer-bg);
+    border-bottom: 1px solid #e9e4e2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* inherits v.$font-family-base */
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: var(--bar-text-default);
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+  }
+
+  &__body {
+    padding-top: space(3);
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__subtitle {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    padding-inline: space(2);
+    margin-bottom: space(3);
+
+    font-family: v.$font-family-heading;
+    font-weight: 700;
+  }
+
+  &__location {
+    font-size: 18px;
+    color: var(--card-location-color);
+
+    @include mq.up(500px) {
+      font-size: 24px;
+    }
+  }
+
+  &__duration {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--card-duration-color);
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: space(2);
+    margin-bottom: space(2);
+
+    span:first-child {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      color: var(--bar-text-default);
+    }
+
+    span:last-child {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 20px;
+      color: var(--bar-text-default);
+    }
+
+    &:nth-last-of-type(2) {
+      margin-bottom: space(3);
+    }
+  }
+
+  &__footer {
+    padding: space(3) space(2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-top: 1px solid #e9e4e2;
+
+    span {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 22px;
+      color: var(--bar-text-default);
+    }
+
+    strong {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--price-default);
+    }
+  }
+
+  @include mq.down(743px) {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.25s ease;
+    box-shadow: none;
+
+    &__body {
+      flex: 1;
+      overflow-y: auto;
+    }
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

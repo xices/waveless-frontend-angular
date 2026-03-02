@@ -1,0 +1,192 @@
+@use "styles/itcss/00.settings/spacing" as *;
+@use "styles/itcss/00.settings/variables" as v;
+@use "styles/itcss/02.tools/media-queries" as mq;
+
+.c-card {
+  background: var(--color-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow-base-default);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+
+  &__image-wrapper {
+    position: relative;
+    aspect-ratio: var(--card-image-ratio);
+    border-radius: var(--card-radius) var(--card-radius) 0 0;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__badge {
+    position: absolute;
+    top: space(2);
+    right: space(2);
+    background: var(--color-accent);
+    padding: 6px 12px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    border-radius: 999px;
+    font-family: v.$font-family-heading;
+    font-weight: 800;
+    font-size: 12px;
+    color: var(--card-text-badge-color);
+  }
+
+  &__content {
+    padding: space(2) 0 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__meta {
+    display: flex;
+    gap: space(1);
+    margin-bottom: 12px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    margin-inline: space(2);
+    line-height: 1;
+  }
+
+  &__location {
+    font-family: v.$font-family-heading;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--card-location-color);
+  }
+
+  &__duration {
+    font-family: v.$font-family-heading;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--card-duration-color);
+  }
+
+  &__title {
+    font-family: 'Nunito';
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--card-title-color);
+    margin-bottom: space(2);
+    margin-inline: space(2);
+    line-height: 1.22;
+  }
+
+  /* ===================================================== */
+  /* ================= FOOTER DESKTOP ==================== */
+  /* ===================================================== */
+
+  &__footer {
+    background: var(--card-head-footer-bg);
+    padding: 12px space(2) space(2);
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__price-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__price-label {
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--card-price-label-color);
+  }
+
+  &__price {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--card-price-color);
+    line-height: 1.1;
+  }
+
+  &__breakdown {
+    font-size: 14px;
+    background: none;
+    border: none;
+    color: var(--color-brand);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    cursor: pointer;
+    text-decoration: underline;
+
+    &.is-open {
+      .c-card__arrow {
+        transform: rotate(180deg);
+      }
+    }
+
+    &-wrapper {
+      position: relative;
+    }
+  }
+
+  &__arrow {
+    width: 9px;
+    height: 9px;
+    transition: transform 0.2s ease;
+  }
+
+  /* ===================================================== */
+  /* ================= MOBILE ≤ 743px ==================== */
+  /* ===================================================== */
+
+  @include mq.down(743px) {
+
+    &__footer {
+      flex-direction: column;
+      align-items: stretch;
+      gap: space(2);
+    }
+
+    &__price-block {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      align-items: center;
+      row-gap: 2px;
+      // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    }
+
+    /* Breakdown izquierda */
+    &__breakdown-wrapper {
+      grid-column: 1;
+      grid-row: 2;
+      justify-self: start;
+    }
+
+    /* Label arriba derecha */
+    &__price-label {
+      grid-column: 2;
+      grid-row: 1;
+      text-align: right;
+    }
+
+    /* Precio debajo derecha */
+    &__price {
+      grid-column: 2;
+      grid-row: 2;
+      text-align: right;
+    }
+
+    /* Botón full width */
+    .c-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,70 +1,163 @@
 @use "styles/itcss/02.tools/mixins" as mixins;
+@use "styles/itcss/02.tools/media-queries" as mq;
+@use "styles/itcss/00.settings/variables" as v;
+@use "styles/itcss/00.settings/spacing" as *;
 
 .adventures {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
+
+  padding: space(6) 0;
+  margin-inline: 0;
+
+  /* Container */
+  &__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 72px 0;
+    padding: 0 space(2);
 
-  &__container {
-    max-width: 1128px;
-    margin: 0 auto;
+    @include mq.up(v.$bp-small) {
+      padding: 0 space(3);
+    }
+
+    @include mq.up(v.$bp-desktop) {
+      padding: 0 space(4);
+    }
   }
 
+  /* Header */
   &__header {
     text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: space(3);
+
+    @include mq.up(v.$bp-desktop) {
+      margin-bottom: space(9);
+    }
   }
 
   &__title {
+    margin-bottom: space(1);
     font-weight: 700;
     @include mixins.font-responsive(section-title);
   }
 
   &__subtitle {
-    margin-top: 8px;
-    color: #6b7280;
+    color: var(--color-muted);
     @include mixins.font-responsive(section-subtitle);
   }
 
-  &__sidebar {
-    position: sticky;
-    top: 120px;
-    height: fit-content;
-  }
+  /* =========================
+     LAYOUT (Sidebar + Content)
+     ========================= */
 
-  &__content {
-    width: 100%;
-  }
-
-  &__grid {
+  &__layout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: space(4);
   }
 
-  // REVISAR ESTOS BREAKPOINTS, NO COINCIDEN CON LOS DEFINIDOS EN VARIABLES
-  /* Responsive */
-    @media (max-width: 1200px) {
-    .adventures__grid {
-        grid-template-columns: repeat(2, 1fr);
+  /* Tablet → sidebar visible */
+  @include mq.up(v.$bp-desktop) {
+    &__layout {
+      grid-template-columns: 272px 1fr;
     }
+  }
+
+  /* Sidebar */
+  &__sidebar {
+    display: none;
+
+     @include mq.up(v.$bp-desktop) {
+      display: block;
+      position: sticky;
+      top: 120px;
+      height: fit-content;
+    }
+  }
+
+  @include mq.up(v.$bp-small) {
+    margin-inline: space(9);
+  }
+
+  /* Content */
+  &__content {
+    min-width: 0;
+  }
+
+  &__region {
+    font-family: v.$font-family-heading;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: space(3);
+  }
+
+  /* BTN */
+  &__filters-btn {
+    display: flex;
+    align-items: center;
+
+    gap: space(1);
+
+    padding: space(1) 14px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    margin: space(6) 0 space(3) 0;
+
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+
+    background: #f4efec;
+    border: 1px solid #d6d1cd;
+    border-radius: 999px;
+
+    color: var(--color-text);
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #ece7e4;
     }
 
-    @media (max-width: 992px) {
-    .adventures {
-        grid-template-columns: 1fr;
+    @include mq.down(v.$bp-tablet) {
+      display: inline-flex;
+      align-items: center;
     }
 
-    .adventures__sidebar {
-        position: relative;
-        top: 0;
+    @include mq.up(v.$bp-desktop)  {
+      display: none;
+    }
+  }
+
+  /* DRAWER */
+  &__drawer {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+
+    background: var(--color-bg);
+    z-index: 200;
+
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    display: flex;
+    flex-direction: column;
+
+    &.is-open {
+      transform: translateX(0);
     }
 
-    .adventures__grid {
-        grid-template-columns: 1fr;
+    @include mq.up(v.$bp-small) {
+      width: 320px;
+      height: 100vh;
+      transform: translateX(-100%);
     }
+
+    @include mq.up(v.$bp-desktop) {
+      display: none;
     }
+  }
+  
+  
 }

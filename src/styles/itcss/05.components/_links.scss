@@ -1,0 +1,12 @@
+.c-link {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-brand);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: opacity .2s ease;
+
+  &:hover {
+    opacity: .7;
+  }
+}

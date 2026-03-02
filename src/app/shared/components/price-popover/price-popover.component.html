@@ -1,0 +1,51 @@
+<div
+  class="c-popover"
+  [class.is-above]="openAbove"
+  role="dialog"
+  [attr.id]="id"
+  [attr.aria-labelledby]="id + '-title'"
+>
+  <div class="c-popover__header">
+    <span [id]="id + '-title'">{{ title }}</span>
+    <button 
+        class="c-popover__close"
+        type="button"
+        (click)="closePopover()"
+        aria-label="Cerrar desglose"
+        >
+        <img 
+            src="assets/images/icons/ui/close.svg" 
+            alt="" 
+        />
+    </button>
+  </div>
+
+  <div class="c-popover__body">
+
+    <div *ngIf="subtitle || days !== undefined" class="c-popover__subtitle">
+
+        <span class="c-popover__location" *ngIf="subtitle">
+            {{ subtitle }}
+        </span>
+
+        <span class="c-popover__duration" *ngIf="days !== undefined">
+            {{ days }} días
+        </span>
+
+    </div>
+
+    <div
+      class="c-popover__row"
+      *ngFor="let row of rows"
+    >
+      <span>{{ row.label }}</span>
+      <span>{{ row.value }}</span>
+    </div>
+
+    <div class="c-popover__footer">
+      <span>Precio final</span>
+      <strong>{{ total }}</strong>
+    </div>
+
+  </div>
+</div>

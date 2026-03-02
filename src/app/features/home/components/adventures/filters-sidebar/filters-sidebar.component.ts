@@ -1,42 +1,71 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { TooltipComponent } from '../../../../../shared/components/tooltip/tooltip.component';
+
+interface AdventureOption {
+  label: string;
+  key: string;
+  functional: boolean;
+  checked: boolean;
+}
+
+interface Filters {
+  types: string[];
+  minPrice: number | null;
+  maxPrice: number | null;
+}
 
 @Component({
   selector: 'app-filters-sidebar',
   standalone: true,
+  imports: [CommonModule, TooltipComponent, FormsModule],
   templateUrl: './filters-sidebar.component.html',
-  styleUrls: ['./filters-sidebar.component.scss']
+  styleUrl: './filters-sidebar.component.scss'
 })
 export class FiltersSidebarComponent {
 
-  @Output() filtersChange = new EventEmitter<any>();
+  @Output() filtersChange = new EventEmitter<Filters>();
+  @Output() close = new EventEmitter<void>();
 
-  filters = {
-    types: [] as string[],
-    minPrice: null as number | null,
-    maxPrice: null as number | null
-  };
+  openSection: string | null = 'aventura';
 
-  toggleType(type: string, event: any) {
-    if (event.target.checked) {
-      this.filters.types.push(type);
-    } else {
-      this.filters.types =
-        this.filters.types.filter(t => t !== type);
-    }
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
+
+  adventureOptions: AdventureOption[] = [
+    { label: 'Quads', key: 'Quads', functional: true, checked: false },
+    { label: 'Parapente', key: 'Parapente', functional: true, checked: false },
+    { label: 'Rafting', key: 'Rafting', functional: false, checked: false },
+    { label: 'Explora', key: 'Explora', functional: false, checked: false },
+    { label: 'Buceo', key: 'Buceo', functional: false, checked: false },
+    { label: 'Paracaídas', key: 'Paracaidas', functional: false, checked: false },
+    { label: 'Snowboard', key: 'Snowboard', functional: false, checked: false },
+    { label: 'Surf', key: 'Surf', functional: false, checked: false }
+  ];
+
+  toggleSection(section: string): void {
+    this.openSection = this.openSection === section ? null : section;
+  }
+
+  isOpen(section: string): boolean {
+    return this.openSection === section;
+  }
+
+  toggleOption(option: AdventureOption): void {
+    option.checked = !option.checked;
     this.emitFilters();
   }
 
-  setMinPrice(event: any) {
-    this.filters.minPrice = Number(event.target.value);
-    this.emitFilters();
-  }
+  emitFilters(): void {
+    const selectedTypes = this.adventureOptions
+      .filter(opt => opt.checked && opt.functional)
+      .map(opt => opt.key);
 
-  setMaxPrice(event: any) {
-    this.filters.maxPrice = Number(event.target.value);
-    this.emitFilters();
-  }
-
-  emitFilters() {
-    this.filtersChange.emit(this.filters);
+    this.filtersChange.emit({
+      types: selectedTypes,
+      minPrice: this.minPrice ?? null,
+      maxPrice: this.maxPrice ?? null
+    });
   }
 }

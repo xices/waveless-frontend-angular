@@ -1,0 +1,54 @@
+@use "styles/itcss/00.settings/variables" as *;
+@use "styles/itcss/00.settings/spacing" as *;
+@use "styles/itcss/02.tools/media-queries" as mq;
+
+.footer {
+  width: 100%;
+  margin-top: space(9);
+
+  &__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 space(6);
+    text-align: center;
+
+    @include mq.up($bp-tablet) {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    @include mq.down($bp-tablet) {
+        padding: 0 space(3);
+    }
+  }
+
+  &__top {
+    background: var(--card-head-footer-bg);
+    padding: space(6) 0;
+
+    @include mq.down($bp-tablet) {
+        padding: space(4) 0;
+    }
+  }
+
+  &__logo {
+    height: 40px;
+  }
+
+  &__bottom {
+    background: var(--color-footer-bottom-bg);
+    padding: space(2) 0;
+
+    @include mq.down($bp-tablet) {
+        padding: space(2) 0;
+    }
+  }
+
+  &__copyright {
+    color: var(--color-brand);
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+  }
+}

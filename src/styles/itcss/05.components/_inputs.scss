@@ -1,0 +1,25 @@
+@use "styles/itcss/00.settings/spacing" as *;
+
+.c-input {
+  width: 100%;
+  border: 1px solid var(--color-brand);
+  border-radius: var(--radius-pill);
+  padding: space(2) space(3);
+  font-size: 14px;
+  background: var(--color-bg);
+  outline: none;
+  transition: all .2s ease;
+
+  &::placeholder {
+    color: #999;
+  }
+
+  &:focus {
+    border-color: var(--color-accent);
+  }
+
+  &--with-icon {
+    position: relative;
+    padding-left: 40px;
+  }
+}

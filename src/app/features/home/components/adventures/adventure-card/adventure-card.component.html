@@ -1,18 +1,88 @@
-<div class="card">
-  <div class="card__image">
-    <img [src]="trip.image" [alt]="trip.title">
-    <span class="card__badge">{{ trip.category }}</span>
+<article class="c-card">
+
+  <div class="c-card__image-wrapper">
+    <img
+      [src]="trip.image"
+      [alt]="trip.title"
+      class="c-card__image"
+    />
+
+    <span class="c-card__badge">
+      {{ trip.category }}
+    </span>
   </div>
 
-  <div class="card__body">
-    <p class="card__location">{{ trip.location }}</p>
-    <h3 class="card__title">{{ trip.title }}</h3>
+  <div class="c-card__content">
 
-    <div class="card__footer">
-      <div class="card__price">
-        Desde <strong>{{ trip.price }} €</strong>
-      </div>
-      <button class="card__btn">Reservar</button>
+    <div class="c-card__meta">
+      <span class="c-card__location">
+        {{ trip.location }}
+      </span>
+
+      <span class="c-card__duration">
+        {{ trip.days }} días
+      </span>
     </div>
+
+    <h3 class="c-card__title">
+      {{ trip.title }}
+    </h3>
+
+    <div class="c-card__footer">
+
+      <div class="c-card__price-block">
+
+        <span class="c-card__price-label">
+          Desde
+        </span>
+
+        <span class="c-card__price">
+          {{ trip.price }} €
+        </span>
+
+        <!-- BREAKDOWN WRAPPER -->
+        <div class="c-card__breakdown-wrapper">
+
+          <button
+            class="c-card__breakdown"
+            type="button"
+            (click)="toggleBreakdown($event)"
+            [class.is-open]="isBreakdownOpen"
+            [attr.aria-expanded]="isBreakdownOpen"
+            [attr.aria-controls]="'price-popover-' + index"
+          >
+            Ver desglose
+            <img
+              class="c-card__arrow"
+              src="assets/images/icons/ui/arrow-up-down.svg"
+              alt=""
+            />
+          </button>
+
+          <!-- SHARED POPOVER -->
+          <app-price-popover
+            *ngIf="isBreakdownOpen"
+            [id]="'price-popover-' + index"
+            [title]="'Desglose de precios'"
+            [subtitle]="trip.location"
+            [rows]="breakdownRows"
+            [total]="totalPrice"
+            [openAbove]="openAbove"
+            [days]="trip.days"
+            (close)="isBreakdownOpen = false"
+          >
+          </app-price-popover>
+
+        </div>
+
+      </div>
+
+      <button class="c-btn c-btn--outline c-btn--lg">
+        Reservar
+      </button>
+
+    </div>
+
   </div>
-</div>
+
+</article>

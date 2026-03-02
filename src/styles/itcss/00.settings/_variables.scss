@@ -1,7 +1,8 @@
 :root {
   --color-brand: #622f60;
   --color-accent: #ff8f50;
-  --color-text: #1f2937;
+  --color-accent-strong: #B85C28;
+  --color-text: #342e34;
   --color-muted: #6b7280;
   --color-bg: #ffffff;
   --color-surface: #f6f2f9;
@@ -16,6 +17,9 @@
 
   --color-control-active: var(--color-accent);
 
+  --card-head-footer-bg: #FBF6F4;
+  --color-footer-bottom-bg: #E0D9E0;
+
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-pill: 999px;
@@ -29,7 +33,7 @@
 
 $bp-mobile: 390px;
 $bp-small: 744px;
-$bp-tablet: 1024px;
+$bp-tablet: 1023px;
 $bp-desktop: 1440px;
 $bp-wide: 1600px;
 
@@ -64,5 +68,23 @@ $font-scale: (
     small: 20px,
     tablet: 22px,
     desktop: 22px
+  ),
+
+  // UI scale
+  ui-xs: (
+    base: 12px,
+    line-height: 16px
+  ),
+  ui-sm: (
+    base: 14px,
+    line-height: 20px
+  ),
+  ui-md: (
+    base: 16px,
+    line-height: 24px
+  ),
+  ui-lg: (
+    base: 18px,
+    line-height: 24px
   )
 );

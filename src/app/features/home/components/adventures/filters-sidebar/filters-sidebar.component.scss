@@ -1,0 +1,225 @@
+@use "styles/itcss/00.settings/spacing" as *;
+@use "styles/itcss/00.settings/variables" as v;
+@use "styles/itcss/02.tools/mixins" as mixins;
+@use "styles/itcss/02.tools/media-queries" as mq;
+@use "styles/itcss/05.components/inputs";
+@use "styles/itcss/05.components/links";
+
+.c-filters {
+  border-radius: 0;
+  background: transparent;
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+
+  @include mq.up(v.$bp-wide) {
+    border-radius: 32px;
+  }
+
+  &__wrap-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 0 0 0 space(6);
+    margin: 0 -24px;
+
+    @include mq.up(v.$bp-desktop) {
+      display: inline-block;
+      border-bottom: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: space(1) space(3) space(1) space(1);
+    position: relative;
+    top: -5px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    
+    @include mq.up(v.$bp-desktop) {
+      display: none;
+    }
+  }
+
+  &__inner {
+    background: var(--card-head-footer-bg);
+    border-radius: 0;
+    padding: 16px space(3) 32px space(3);
+    display: flex;
+    flex-direction: column;
+    gap: 32px; // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    height: 100%;
+
+    @include mq.up(v.$bp-desktop) {
+        border-radius: 32px;
+        height: auto;
+    }
+  }
+
+  &__title {
+    font-family: v.$font-family-heading;
+    font-weight: 700;
+    @include mixins.font-token(ui-lg);
+    color: var(--color-text);
+    padding: 12px 0 space(3) 0;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    text-align: center;
+    margin: 0 -24px;
+
+     @include mq.up(v.$bp-desktop) {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+     }
+  }
+
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+
+    &-left {
+      display: flex;
+      align-items: center;
+      gap: space(1);
+    }
+
+    &.is-open {
+      color: var(--color-accent-strong);
+      margin-bottom: space(3);
+        .c-filters__arrow {
+            transform: rotate(180deg);
+        }
+    }
+  }
+
+  &__arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform .3s ease;
+  }
+
+  &__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease, opacity .2s ease;
+    display: flex;
+    flex-direction: column;
+    padding-inline: space(2);
+    gap: space(3);
+
+    &.is-open {
+      max-height: 800px;
+      opacity: 1;
+    }
+
+    &--price {
+      padding-inline: 0;
+    }
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 12px; // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+
+    &.is-active {
+      .c-filters__checkbox  {
+        background: var(--color-accent);
+      }
+    }
+
+    &-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+      font-weight: 600;
+      @include mixins.font-token(ui-sm);
+
+      &.is-active {
+        .c-filters__option-label  {
+            font-weight: 700;
+        }
+      }
+    }
+  }
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--color-brand);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    position: relative;
+    flex-shrink: 0;
+
+    img {
+        width: 10px;
+    }
+  }
+
+  input:checked + &__checkbox {
+    background: var(--color-accent);
+  }
+
+  input:checked + .c-filters__checkbox::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: url('/assets/images/icons/ui/check.svg') center/contain no-repeat;
+    top: 2px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    left: 2px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+ }
+
+  &__option-label {
+    font-weight: 600;
+    @include mixins.font-token(ui-sm);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+  }
+
+  input:checked ~ .c-filters__option-label {
+    font-weight: 700;
+ }
+
+  &__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    img {
+      position: absolute;
+      left: 16px;
+      width: 16px;
+    }
+
+    input {
+      padding-left: 40px;
+    }
+  }
+
+  &__plus {
+    display: inline-block;
+  }
+
+}

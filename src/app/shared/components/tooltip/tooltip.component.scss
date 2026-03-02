@@ -1,0 +1,43 @@
+@use "styles/itcss/00.settings/spacing" as *;
+
+.c-tooltip {
+  position: relative;
+  display: inline-flex;
+  top: 2px;
+  // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+
+  &__bubble {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.95);
+    background: var(--color-bg);
+    padding: 10px 6px;
+    // NOTE: micro spacing intencional (no pertenece a la escala base 8)
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    z-index: 50;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: var(--color-bg) transparent transparent transparent;
+    }
+  }
+
+  &:hover &__bubble {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}

@@ -1,10 +1,11 @@
 @use "../00.settings/variables" as *;
+@use "../00.settings/spacing" as *;
 @use "media-queries" as mq;
 
 @mixin container {
   max-width: var(--container);
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: space(3);
 
   @media (max-width: 480px) {
     padding-inline: var(--gutter);
@@ -39,6 +40,57 @@
   @if map-has-key($sizes, desktop) {
     @include mq.up($bp-desktop) {
       font-size: map-get($sizes, desktop);
+    }
+  }
+}
+
+// Tipografía tokenizada (incluye line-height y breakpoints si existen)
+@mixin font-token($token) {
+  $sizes: map-get($font-scale, $token);
+
+  @if $sizes == null {
+    @error "font-token(): token '#{$token}' no existe en $font-scale";
+  }
+
+  $base-size: map-get($sizes, base);
+
+  @if $base-size == null {
+    @error "font-token(): token '#{$token}' no tiene 'base'";
+  }
+
+  font-size: $base-size;
+
+  @if map-has-key($sizes, line-height) {
+    line-height: map-get($sizes, line-height);
+  }
+
+  @if map-has-key($sizes, small) {
+    @include mq.up($bp-small) {
+      font-size: map-get($sizes, small);
+
+      @if map-has-key($sizes, line-height-small) {
+        line-height: map-get($sizes, line-height-small);
+      }
+    }
+  }
+
+  @if map-has-key($sizes, tablet) {
+    @include mq.up($bp-tablet) {
+      font-size: map-get($sizes, tablet);
+
+      @if map-has-key($sizes, line-height-tablet) {
+        line-height: map-get($sizes, line-height-tablet);
+      }
+    }
+  }
+
+  @if map-has-key($sizes, desktop) {
+    @include mq.up($bp-desktop) {
+      font-size: map-get($sizes, desktop);
+
+      @if map-has-key($sizes, line-height-desktop) {
+        line-height: map-get($sizes, line-height-desktop);
+      }
     }
   }
 }

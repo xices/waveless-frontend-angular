@@ -1,3 +1,5 @@
+@use "styles/itcss/00.settings/spacing" as *;
+
 .c-btn {
   display: inline-flex;
   align-items: center;
@@ -16,19 +18,19 @@
 
 /* Tamaños */
 .c-btn--md {
-  padding: 16px 41px;
+  padding: space(2) 41px; // NOTE: micro spacing intencional (no pertenece a la escala base 8)
   font-size: 16px;
 }
 
 .c-btn--lg {
-  padding: 14px 28px;
+  padding: 10px 26px; // NOTE: micro spacing intencional (no pertenece a la escala base 8)
   font-size: 16px;
 }
 
 /* Variantes */
 .c-btn--brand {
   background: var(--color-brand);
-  color: #fff;
+  color: var(--color-bg);
 
   &:hover {
     background: color-mix(in srgb, var(--color-brand) 85%, black);
@@ -41,12 +43,12 @@
 }
 
 .c-btn--outline {
-  background: transparent;
+  background: var(--color-bg);
   border: 1px solid var(--color-brand);
   color: var(--color-brand);
 
   &:hover {
     background: var(--color-brand);
-    color: #fff;
+    color: var(--color-bg);
   }
 }

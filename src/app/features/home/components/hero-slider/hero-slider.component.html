@@ -1,4 +1,9 @@
-<section class="hero">
+<section
+  class="hero"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Carrusel de destinos destacados"
+>
   <div
     class="hero__track"
     [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
@@ -36,6 +41,7 @@
 
   <button
     class="hero__arrow hero__arrow--left"
+    type="button"
     (click)="prev()"
     [disabled]="currentIndex === 0"
     [class.is-disabled]="currentIndex === 0"
@@ -48,6 +54,7 @@
 
   <button
     class="hero__arrow hero__arrow--right"
+    type="button"
     (click)="next()"
     [disabled]="currentIndex === slides.length - 1"
     [class.is-disabled]="currentIndex === slides.length - 1"
@@ -67,7 +74,9 @@
       class="hero__dot"
       [class.is-active]="i === currentIndex"
       (click)="goTo(i)"
-      [attr.aria-label]="'Ir al slide ' + (i + 1)"
+      type="button"
+      [attr.aria-label]="'Ir al slide ' + (i + 1) + ' de ' + slides.length"
+      [attr.aria-current]="i === currentIndex ? 'true' : null"
     ></button>
   </div>
 </section>
