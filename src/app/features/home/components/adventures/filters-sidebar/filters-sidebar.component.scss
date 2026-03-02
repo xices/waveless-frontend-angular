@@ -117,10 +117,12 @@
     flex-direction: column;
     padding-inline: space(2);
     gap: space(3);
+    position: relative; // 👈 importante para contexto controlado
 
     &.is-open {
       max-height: 800px;
       opacity: 1;
+      overflow: visible; // 👈 CLAVE
     }
 
     &--price {
